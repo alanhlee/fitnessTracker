@@ -6,21 +6,6 @@ module.exports = mongoose.connect("mongodb://localhost/workout", {
   useFindAndModify: false,
   useUnifiedTopology: true
   })
-  .then(()=>{})
-  .catch((err)=>console.error(err))
-
-
-// let mongooseDb = async () =>
-// {
-//   console.log('create connection')
-//   return await mongoose.connect("mongodb://localhost/workout", {
-//       useNewUrlParser: true,
-//       useFindAndModify: false,
-//       useUnifiedTopology: true
-//       }) 
-// }
-
-
 
 let workoutSeed = [
   {
@@ -151,19 +136,15 @@ let workoutSeed = [
   }
 ];
 
-// db.Workout.deleteMany({})
-//   .then( () => {
-//     console.log('Insert many')
-//      db.Workout.collection.insertMany(workoutSeed)
-//   })
-//   .then(data => {
-//     console.log(data)
-//     // console.log(data.result.n + " records inserted!");
-//     process.exit(0);
-//   })
-//   .catch(err => {
-//     console.error(err);
-//     process.exit(1);
-//   });
+db.Workout.deleteMany({})
+  .then( () => db.Workout.collection.insertMany(workoutSeed))
+  .then(data => {
+    console.log(data.result.n + " records inserted!");
+    // process.exit(0);
+  })
+  .catch(err => {
+    console.error(err);
+    // process.exit(1);
+  });
 
 // module.exports = mongooseDb
