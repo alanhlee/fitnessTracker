@@ -8,9 +8,7 @@ app.use(express.static(join(__dirname, "public")));
 
 app.use(require("./routes"));
 
-// app.use(require("./seeders/seed.js"))
-
-
+// require("./seeders/seed.js")
 // app.listen(3000, () => 
 // {
 //     console.log('http://localhost:3000')

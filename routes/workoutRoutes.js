@@ -1,33 +1,49 @@
 const router = require('express').Router()
 const { Workout } = require('../models')
-const { nextTick } = require('process')
 
-router.get('/workouts', (req, res) => {
-    Workout.find().limit(1).sort({_id: -1})
-    .then(data => res.json(data))
-    .catch(err => console.error(err))
+router.get('/workouts', async (req, res) => {
+  try
+  {
+    console.log('in workout routes - backend')
+    let item = await Workout.find().limit(1).sort({_id: -1})
+    res.json(item)
+  }
+  catch(err) {console.error(err)}
+    
+    // Workout.find().limit(1).sort({_id: -1})
+    // .then(data => res.json(data))
+    // .catch(err => console.error(err))
 })
 
-router.get('/workouts/range', (req, res) => {
-   Workout.find()
-   .then(data => res.json(data))
-   .catch(err => console.error(err))
+router.get('/workouts/range', async (req, res) => {
+  try
+  {
+    let item = await Workout.find()
+    res.json(item)
+  }
+  catch (err) {console.error(err)}
+  //  Workout.find()
+  //  .then(data => res.json(data))
+  //  .catch(err => console.error(err))
   
   })
 
-router.put('/workouts/:id', (req, res) => {
-  console.log(req.body)
-    Workout.findByIdAndUpdate(req.params.id, req.body)
-    .then(()=> res.sendStatus(200))
-    .catch(err => console.error(err))
+router.put('/workouts/:id', async (req, res) => {
+  try {
+    console.log(req.body)
+    let item = await Workout.findByIdAndUpdate(req.params.id, {$set : {exercises : [req.body]}})
+    res.json(item)
+  } catch (e) {console.log(e)}
 })
 
 
-router.post('/workouts/', (req, res) => {
-    Workout.create(req.body) 
-      .then(() => res.sendStatus(200))
-      .catch(err => console.error(err));
+router.post('/workouts/', async (req, res) => {
+  try { 
+    console.log(req.body)
+  let item = await Workout.create(req.body) 
+  res.json(item)
+  } catch(e) {console.log(e)}
 })
 
 
-module.exports = router;
+module.exports = router
