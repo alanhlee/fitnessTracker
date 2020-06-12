@@ -5,7 +5,7 @@ module.exports = mongoose.connect("mongodb://localhost/workout", {
   useNewUrlParser: true,
   useFindAndModify: false,
   useUnifiedTopology: true
-});
+  }) 
 
 let workoutSeed = [
   {
@@ -146,3 +146,4 @@ let workoutSeed = [
 //     console.error(err);
 //     // process.exit(1);
 //   });
+// module.exports = mongoosedb
