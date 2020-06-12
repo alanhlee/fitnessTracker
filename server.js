@@ -10,5 +10,9 @@ app.use(express.static(join(__dirname, "public")));
 app.use(require("./routes"));
 
 require("./seeders/seed.js")
-.then(() => app.listen(3000, () => console.log('http://localhost:3000')) )
-.catch((err) => console.error(err));
+  .then(() =>
+    app.listen(process.env.PORT || 3000, () =>
+      console.log("http://localhost:3000")
+    )
+  )
+  .catch((err) => console.error(err));
